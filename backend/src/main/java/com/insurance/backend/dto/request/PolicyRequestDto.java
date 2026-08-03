@@ -1,7 +1,6 @@
 package com.insurance.backend.dto.request;
 
-import com.insurance.backend.entity.PolicyStatus;
-import com.insurance.backend.entity.PolicyType;
+import com.insurance.backend.entity.enums.PolicyType;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -39,7 +38,4 @@ public class PolicyRequestDto {
 
     @NotNull(message = "Policy end date is required")
     private LocalDate endDate;
-
-    @NotNull(message = "Policy status is required")
-    private PolicyStatus status;
 }

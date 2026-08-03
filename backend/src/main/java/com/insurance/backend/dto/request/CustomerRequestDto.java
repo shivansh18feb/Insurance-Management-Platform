@@ -1,7 +1,6 @@
 package com.insurance.backend.dto.request;
 
-import com.insurance.backend.entity.CustomerStatus;
-import com.insurance.backend.entity.Gender;
+import com.insurance.backend.entity.enums.Gender;
 import jakarta.validation.constraints.*;
 
 import lombok.*;

@@ -1,7 +1,7 @@
 package com.insurance.backend.dto.response;
 
-import com.insurance.backend.entity.CustomerStatus;
-import com.insurance.backend.entity.Gender;
+import com.insurance.backend.entity.enums.CustomerStatus;
+import com.insurance.backend.entity.enums.Gender;
 import lombok.*;
 
 import java.time.LocalDate;

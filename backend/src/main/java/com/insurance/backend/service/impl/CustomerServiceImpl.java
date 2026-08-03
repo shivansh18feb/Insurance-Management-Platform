@@ -4,7 +4,7 @@ import com.insurance.backend.constant.MessageConstants;
 import com.insurance.backend.dto.request.CustomerRequestDto;
 import com.insurance.backend.dto.response.CustomerResponseDto;
 import com.insurance.backend.entity.Customer;
-import com.insurance.backend.entity.CustomerStatus;
+import com.insurance.backend.entity.enums.CustomerStatus;
 import com.insurance.backend.exception.DuplicateResourceException;
 import com.insurance.backend.exception.ResourceNotFoundException;
 import com.insurance.backend.mapper.CustomerMapper;

@@ -5,6 +5,7 @@ import com.insurance.backend.dto.request.PolicyRequestDto;
 import com.insurance.backend.dto.response.PolicyResponseDto;
 import com.insurance.backend.entity.Customer;
 import com.insurance.backend.entity.Policy;
+import com.insurance.backend.entity.enums.PolicyStatus;
 import com.insurance.backend.exception.InvalidRequestException;
 import com.insurance.backend.exception.ResourceNotFoundException;
 import com.insurance.backend.mapper.PolicyMapper;
@@ -41,9 +42,18 @@ public class PolicyServiceImpl implements PolicyService {
 
         Customer customer = getCustomerEntity(requestDto.getCustomerId());
 
-        Policy policy = policyMapper.toEntity(requestDto);
+        Policy policy = new Policy();
+
+        policy.setPolicyName(requestDto.getPolicyName());
+        policy.setPolicyType(requestDto.getPolicyType());
+        policy.setCoverageAmount(requestDto.getCoverageAmount());
+        policy.setPremiumAmount(requestDto.getPremiumAmount());
+        policy.setStartDate(requestDto.getStartDate());
+        policy.setEndDate(requestDto.getEndDate());
+
         policy.setCustomer(customer);
         policy.setPolicyNumber(generatePolicyNumber());
+        policy.setStatus(PolicyStatus.ACTIVE);
 
         Policy savedPolicy = policyRepository.save(policy);
 

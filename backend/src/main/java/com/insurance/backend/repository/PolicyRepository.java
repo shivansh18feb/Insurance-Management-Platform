@@ -1,8 +1,8 @@
 package com.insurance.backend.repository;
 
 import com.insurance.backend.entity.Policy;
-import com.insurance.backend.entity.PolicyStatus;
-import com.insurance.backend.entity.PolicyType;
+import com.insurance.backend.entity.enums.PolicyStatus;
+import com.insurance.backend.entity.enums.PolicyType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;

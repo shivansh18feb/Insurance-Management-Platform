@@ -1,6 +1,8 @@
 package com.insurance.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.insurance.backend.entity.enums.PolicyStatus;
+import com.insurance.backend.entity.enums.PolicyType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -26,10 +28,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class Policy extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(nullable = false, unique = true, length = 30)
     private String policyNumber;

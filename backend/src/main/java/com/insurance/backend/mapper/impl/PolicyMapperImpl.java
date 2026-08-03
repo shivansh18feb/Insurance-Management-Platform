@@ -2,44 +2,80 @@ package com.insurance.backend.mapper.impl;
 
 import com.insurance.backend.dto.request.PolicyRequestDto;
 import com.insurance.backend.dto.response.PolicyResponseDto;
+import com.insurance.backend.entity.Customer;
 import com.insurance.backend.entity.Policy;
 import com.insurance.backend.mapper.PolicyMapper;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PolicyMapperImpl implements PolicyMapper {
 
-    private final ModelMapper modelMapper;
-
-    public PolicyMapperImpl(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
-
     @Override
     public Policy toEntity(PolicyRequestDto requestDto) {
-        return modelMapper.map(requestDto, Policy.class);
+
+        if (requestDto == null) {
+            return null;
+        }
+
+        Policy policy = new Policy();
+
+        policy.setPolicyName(requestDto.getPolicyName());
+        policy.setPolicyType(requestDto.getPolicyType());
+        policy.setCoverageAmount(requestDto.getCoverageAmount());
+        policy.setPremiumAmount(requestDto.getPremiumAmount());
+        policy.setStartDate(requestDto.getStartDate());
+        policy.setEndDate(requestDto.getEndDate());
+
+        return policy;
     }
 
     @Override
     public PolicyResponseDto toResponseDto(Policy policy) {
 
-        PolicyResponseDto response = modelMapper.map(policy, PolicyResponseDto.class);
+        if (policy == null) {
+            return null;
+        }
 
-        response.setCustomerId(policy.getCustomer().getId());
+        PolicyResponseDto response = new PolicyResponseDto();
 
-        response.setCustomerFullName(
-                String.format("%s %s",
-                        policy.getCustomer().getFirstName(),
-                        policy.getCustomer().getLastName()
-                ).trim()
-        );
+        response.setId(policy.getId());
+        response.setPolicyNumber(policy.getPolicyNumber());
+        response.setPolicyName(policy.getPolicyName());
+        response.setPolicyType(policy.getPolicyType());
+        response.setCoverageAmount(policy.getCoverageAmount());
+        response.setPremiumAmount(policy.getPremiumAmount());
+        response.setStartDate(policy.getStartDate());
+        response.setEndDate(policy.getEndDate());
+        response.setStatus(policy.getStatus());
+        response.setCreatedAt(policy.getCreatedAt());
+        response.setUpdatedAt(policy.getUpdatedAt());
+
+        Customer customer = policy.getCustomer();
+        if (customer != null) {
+            response.setCustomerId(customer.getId());
+
+            String fullName = String.format("%s %s",
+                    customer.getFirstName(),
+                    customer.getLastName());
+
+            response.setCustomerFullName(fullName);
+        }
 
         return response;
     }
 
     @Override
     public void updateEntity(PolicyRequestDto requestDto, Policy policy) {
-        modelMapper.map(requestDto, policy);
+
+        if (requestDto == null || policy == null) {
+            return;
+        }
+
+        policy.setPolicyName(requestDto.getPolicyName());
+        policy.setPolicyType(requestDto.getPolicyType());
+        policy.setCoverageAmount(requestDto.getCoverageAmount());
+        policy.setPremiumAmount(requestDto.getPremiumAmount());
+        policy.setStartDate(requestDto.getStartDate());
+        policy.setEndDate(requestDto.getEndDate());
     }
 }

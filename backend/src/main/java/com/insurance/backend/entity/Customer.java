@@ -1,6 +1,8 @@
 package com.insurance.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.insurance.backend.entity.enums.CustomerStatus;
+import com.insurance.backend.entity.enums.Gender;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -21,10 +23,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Customer extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @NotBlank(message = "First name is required")
     @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")

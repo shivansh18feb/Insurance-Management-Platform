@@ -1,7 +1,7 @@
 package com.insurance.backend.dto.response;
 
-import com.insurance.backend.entity.PolicyStatus;
-import com.insurance.backend.entity.PolicyType;
+import com.insurance.backend.entity.enums.PolicyStatus;
+import com.insurance.backend.entity.enums.PolicyType;
 import lombok.*;
 
 import java.math.BigDecimal;
