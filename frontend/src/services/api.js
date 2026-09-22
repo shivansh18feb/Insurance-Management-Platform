@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+
 const api = axios.create({
-  baseURL: '/',
+  baseURL: API_BASE_URL || '/',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -24,8 +26,7 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.location.href = '/login';
-    }
+      window.location.href = '/login';    }
     return Promise.reject(error);
   }
 );
@@ -99,7 +100,7 @@ export const documentApi = {
     headers: { 'Content-Type': 'multipart/form-data' }
   }),
   getByCustomer: (customerId) => api.get(`/api/documents/customer/${customerId}`),
-  downloadUrl: (id) => `/api/documents/${id}/download`,
+  downloadUrl: (id) => `${API_BASE_URL}/api/documents/${id}/download`,
   verify: (id) => api.put(`/api/documents/${id}/verify`),
   reject: (id) => api.put(`/api/documents/${id}/reject`),
   getAll: () => api.get('/api/documents'),
@@ -115,9 +116,9 @@ export const premiumApi = {
 
 // ─── Reports ─────────────────────────────────────────────────────────────────
 export const reportApi = {
-  policyPdfUrl: '/api/reports/policies/pdf',
-  claimPdfUrl: '/api/reports/claims/pdf',
-  excelUrl: '/api/reports/business/excel',
+  policyPdfUrl: `${API_BASE_URL}/api/reports/policies/pdf`,
+  claimPdfUrl: `${API_BASE_URL}/api/reports/claims/pdf`,
+  excelUrl: `${API_BASE_URL}/api/reports/business/excel`,
 };
 
 // ─── Notifications ───────────────────────────────────────────────────────────
